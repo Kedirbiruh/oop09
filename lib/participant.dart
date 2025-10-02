@@ -2,17 +2,18 @@ class Participant {
   final String firstName;
   final String lastName;
   final int age;
-  final String? addresse;
-  final int? phoneNumber;
+  final String? address;
+  final String? phoneNumber;
   final String? email;
 
-  Participant(
-    this.firstName,
-    this.lastName,
-    this.age, {
-    this.addresse,
+  Participant({
+    required this.firstName,
+    required this.lastName,
+    required this.age, 
+    this.address,
     this.phoneNumber,
     this.email,
+
   });
 
   @override
@@ -23,15 +24,37 @@ class Participant {
         other.firstName == firstName &&
         other.lastName == lastName &&
         other.age == age &&
-        other.addresse == addresse &&
+        other.address == address &&
         other.phoneNumber == phoneNumber &&
         other.email == email;
   }
 
   @override
   int get hashCode =>
-      Object.hash(firstName, lastName, age, addresse, phoneNumber, email);
+      Object.hash(address, phoneNumber, email);
 
-   Participant copyWith({String? addresse, int? phon})
+  Participant copyWith(
+    {Function()? firstName, 
+    Function()? lastName, 
+    Function()? age, 
+    Function()? address, 
+    Function()? phoneNumber, 
+    Function()? email,
+    }) {
+
+    return Participant(
+    
+      firstName: firstName!= null? firstName(): this.firstName,
+      lastName: lastName!= null? lastName(): this.lastName,
+      age: age!= null? age(): this.age,
+      address: address!= null? address(): this.address,
+      phoneNumber: phoneNumber!= null? phoneNumber(): this.phoneNumber,
+      email: email!= null? email(): this.email,
+      );
+  }
+
+  @override
+  String toString() {
+    return 'Participant(firstName: $firstName, lastName: $lastName, age: $age, address: $address, phoneNumber: $phoneNumber, email: $email)';
+  }
 }
-
